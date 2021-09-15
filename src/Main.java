@@ -54,9 +54,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-        List<int[]> listOfArrays = new ArrayList<>();
+        /*List<int[]> listOfArrays = new ArrayList<>();
         int count = 0;
-        /*while (count < 1000) {
+        while (count < 1000) {
             int size = 1000;
             int[] temp = createArray(size);
             temp = bubble(temp);
@@ -70,7 +70,7 @@ public class Main {
 
             }
             System.out.println();
-        }*/
+        }
 
         int[] temp = createArray(10);
         for (int x : temp) {
@@ -81,6 +81,9 @@ public class Main {
         temp = selection(temp);
         for (int x : temp) {
             System.out.print(x + " ");
-        }
+        }*/
+
+        Bubble bub = new Bubble();
+        //Selection select = new Selection();
     }
 }
