@@ -1,5 +1,12 @@
 public class Main {
 
+    public static int[] createArray(int size) {
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = 0;
+        }
+        return array;
+    }
     public static int[] bubble(int[] array) {
         int[] temp = {0};
         return temp;
