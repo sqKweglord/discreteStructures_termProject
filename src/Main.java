@@ -99,7 +99,7 @@ public class Main {
         }
 
         //outputs the total elapsed time and averaged elapsed time as milliseconds
-        System.out.println("Number of items sorted: " + (size * 1000));
+        System.out.println("Total Number of items sorted: " + (size * 1000));
 
         if (sort == 1) {
             System.out.println("Total time for Bubble: " + totalTimeBubble.toMillis() + " milliseconds");
