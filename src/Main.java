@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 
 import static java.time.Duration.ZERO;
 
@@ -10,12 +11,21 @@ import static java.time.Duration.ZERO;
 //do all iterations with a single run of the main
 public class Main {
 
+    //method to create all 1000 arrays at once so that they can be used with each sort
+    public static ArrayList<int[]> returnArrays(int n) {
+        ArrayList<int[]> arrays = new ArrayList<>(1000);
+        for (int i = 0; i < 1000; i++) {
+            arrays.add(createArray(n));
+        }
+        return arrays;
+    }
+
     //method to generate a random array of a specified size
     public static int[] createArray(int size) {
         Random rand = new Random();
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {
-            array[i] = rand.nextInt(5000);
+            array[i] = rand.nextInt(10000);
         }
         return array;
     }
@@ -81,39 +91,40 @@ public class Main {
         Duration totalTimeSelect = ZERO;
 
         //runs 1000 trials of the sort type choosen
-        for (int count = 0; count < 1000; count++) {
-            //creates random array for current trial
-            int[] arr = createArray(size);
 
-            //decides which sort to do
-            switch (sort) {
-                case 1:
-                    Instant start = Instant.now();
-                    bubble(arr);
-                    Instant end = Instant.now();
-                    totalTimeBubble = totalTimeBubble.plus(Duration.between(start, end));
-                    break;
-                case 2:
-                    Instant start2 = Instant.now();
-                    selection(arr);
-                    Instant end2 = Instant.now();
-                    totalTimeSelect = totalTimeSelect.plus(Duration.between(start2, end2));
-                    break;
+            ArrayList<int[]> arrs = returnArrays(size);
+            ArrayList<int[]> arrs2 = arrs;
+
+            //do the bubble sort
+            for (int[] arr : arrs) {
+                Instant start = Instant.now();
+                bubble(arr);
+                Instant end = Instant.now();
+                totalTimeBubble = totalTimeBubble.plus(Duration.between(start, end));
             }
-        }
+
+
+            for (int[] arr : arrs2) {
+                Instant start2 = Instant.now();
+                selection(arr);
+                Instant end2 = Instant.now();
+                totalTimeSelect = totalTimeSelect.plus(Duration.between(start2, end2));
+            }
+
+
 
         System.out.println();
 
         //outputs the total elapsed time and averaged elapsed time as milliseconds
         System.out.println("Total Number of items sorted: " + (size * 1000));
 
-        if (sort == 1) {
+
             System.out.println("Total time for Bubble: " + totalTimeBubble.toMillis() + " milliseconds");
             System.out.println("Average time for Bubble: " + (float)totalTimeBubble.toMillis()/1000+ " milliseconds");
-        } else {
+
             System.out.println("Total time for Selection: " + totalTimeSelect.toMillis() + " milliseconds");
             System.out.println("Average time for Selection: " + (float)totalTimeSelect.toMillis()/1000 + " milliseconds");
-        }
+
         System.out.println();
         System.out.print("Do you want to go aain(y/n): ");
         String ans = scan.next();
