@@ -80,20 +80,20 @@ public class Main {
         scan.reset();
 
         //gets the type of sort to use
-        int sort;
+        /*int sort;
         do {
             System.out.print("enter 1 for bubble or 2 for selection: ");
             sort = scan.nextInt();
-        } while (sort < 1 || sort > 2);
+        } while (sort < 1 || sort > 2);*/
 
         //initializes the duration since it can't be empty or null
         Duration totalTimeBubble = ZERO;
         Duration totalTimeSelect = ZERO;
 
-        //runs 1000 trials of the sort type choosen
+        //creates 1000 arrays and duplicates them so that each sort can have a copy
 
             ArrayList<int[]> arrs = returnArrays(size);
-            ArrayList<int[]> arrs2 = arrs;
+            ArrayList<int[]> arrs2 = (ArrayList<int[]>) arrs.clone();
 
             //do the bubble sort
             for (int[] arr : arrs) {
@@ -103,7 +103,7 @@ public class Main {
                 totalTimeBubble = totalTimeBubble.plus(Duration.between(start, end));
             }
 
-
+            //do the selection sort
             for (int[] arr : arrs2) {
                 Instant start2 = Instant.now();
                 selection(arr);
@@ -117,16 +117,15 @@ public class Main {
 
         //outputs the total elapsed time and averaged elapsed time as milliseconds
         System.out.println("Total Number of items sorted: " + (size * 1000));
-
-
-            System.out.println("Total time for Bubble: " + totalTimeBubble.toMillis() + " milliseconds");
-            System.out.println("Average time for Bubble: " + (float)totalTimeBubble.toMillis()/1000+ " milliseconds");
-
-            System.out.println("Total time for Selection: " + totalTimeSelect.toMillis() + " milliseconds");
-            System.out.println("Average time for Selection: " + (float)totalTimeSelect.toMillis()/1000 + " milliseconds");
+        System.out.println();
+        System.out.println("Total time for Bubble: " + totalTimeBubble.toMillis() + " milliseconds");
+        System.out.println("Average time for Bubble: " + (float)totalTimeBubble.toMillis()/1000+ " milliseconds");
+        System.out.println();
+        System.out.println("Total time for Selection: " + totalTimeSelect.toMillis() + " milliseconds");
+        System.out.println("Average time for Selection: " + (float)totalTimeSelect.toMillis()/1000 + " milliseconds");
 
         System.out.println();
-        System.out.print("Do you want to go aain(y/n): ");
+        System.out.print("Do you want to go again(y/n): ");
         String ans = scan.next();
 
         if(ans.equals("n")) {
