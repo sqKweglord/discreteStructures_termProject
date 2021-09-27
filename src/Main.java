@@ -28,13 +28,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //ArrayList<int[]> arrays1 = returnArrays(500);
-        //ArrayList<int[]> arrays2 = returnArrays(2500);
-        ArrayList<int[]> arrays3 = returnArrays(10000);
+        ArrayList<int[]> arrays1 = returnArrays(500);
+        ArrayList<int[]> arrays2 = returnArrays(2500);
+        ArrayList<int[]> arrays3 = returnArrays(5000);
 
         ArrayList<ArrayList<int[]>> allArrays = new ArrayList<>(3);
-        //allArrays.add(arrays1);
-        //allArrays.add(arrays2);
+        allArrays.add(arrays1);
+        allArrays.add(arrays2);
         allArrays.add(arrays3);
 
         ArrayList<ArrayList<int[]>> allArraysAgain = new ArrayList<>(3);
@@ -66,12 +66,12 @@ public class Main {
 
 
         try {
-            /*
+
             //intializes the sorts
             Sort[] sorts = new Sort[6];
             for (int i = 1; i < 7; i++) {
                 if (i < 4) {
-                    sorts[i-1] = new Sort(allArrays.get(i-1), 1);
+                    sorts[i-1] = new Sort((ArrayList<int[]>) allArrays.get(i-1), 1);
                 } else {
                     sorts[i-1] = new Sort((ArrayList<int[]>) allArraysAgain.get(i-4), 2);
                 }
@@ -82,8 +82,9 @@ public class Main {
             for (int i = 0; i < 6; i++) {
                 threads[i] = new Thread(sorts[i]);
             }
-            */
 
+
+            /*
             Sort[] sorts = new Sort[2];
             for (int i = 1; i < 3; i++) {
                 if (i == 1) {
@@ -98,6 +99,8 @@ public class Main {
             for (int i = 0; i < 2; i++) {
                 threads[i] = new Thread(sorts[i]);
             }
+            */
+
 
             for (Thread t : threads) {
                 t.start();
