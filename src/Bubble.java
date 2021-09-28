@@ -16,7 +16,7 @@ public class Bubble {
         System.out.println();
 
         //sort the array and print the sorted values
-        arr = bubble(arr);
+        bubble(arr);
         for (int num : arr) {
             System.out.print(num + "\s");
         }
