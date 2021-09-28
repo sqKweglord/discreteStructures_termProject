@@ -7,9 +7,10 @@ import java.util.ArrayList;
 public class Main {
 
     //method to create all 1000 arrays at once so that they can be used with each sort
-    public static ArrayList<int[]> returnArrays(int n) {
-        ArrayList<int[]> arrays = new ArrayList<>(1000);
-        for (int i = 0; i < 1000; i++) {
+    public static ArrayList<int[]> returnArrays(int a, int n) {
+        int amt = a;
+        ArrayList<int[]> arrays = new ArrayList<>(amt);
+        for (int i = 0; i < amt; i++) {
             arrays.add(createArray(n));
         }
         return arrays;
@@ -27,10 +28,11 @@ public class Main {
 
 
     public static void main(String[] args) {
+        int arrCnt = 1000;
 
-        ArrayList<int[]> arrays1 = returnArrays(500);
-        ArrayList<int[]> arrays2 = returnArrays(2500);
-        ArrayList<int[]> arrays3 = returnArrays(5000);
+        ArrayList<int[]> arrays1 = returnArrays(arrCnt, 500);
+        ArrayList<int[]> arrays2 = returnArrays(arrCnt, 2500);
+        ArrayList<int[]> arrays3 = returnArrays(arrCnt, 5000);
 
         ArrayList<ArrayList<int[]>> allArrays = new ArrayList<>(3);
         allArrays.add(arrays1);
