@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //use the same arrays for each sort for a better test
 //multi thread to run both sorts at once
@@ -27,27 +28,67 @@ public class Main {
 
 
     public static void main(String[] args) {
-        //***ask the user if the want to test the sorts***
-
-        //test sorts
-        new Bubble();
-        System.out.println();
-        System.out.println();
-        new Selection();
-        System.out.println();
-        System.out.println();
-
-        //***ask user for size or default***
-
         //num of arrays in each arrayList
-        int arrCnt = 1000;
+        int arrCnt;
 
         //***ask user for size or default***
 
         //elements count(elCnt) for small(Sm), medium(Md), and large(Lg) tests
-        int elCntSm = 500;
-        int elCntMd = 2500;
-        int elCntLg = 5000;
+        int elCntSm;
+        int elCntMd;
+        int elCntLg;
+
+        String ch1;
+        Scanner scan = new Scanner(System.in);
+
+        //***ask the user if the want to test the sorts***
+        do {
+            System.out.print("Do you want to test the sorting algorithms before doing the big test? (y/n): ");
+            ch1 = scan.next();
+        } while (!ch1.equals("y") || !ch1.equals("n"));
+        if (ch1.equals("y")) {
+            //test sorts
+            new Bubble();
+            System.out.println();
+            System.out.println();
+            new Selection();
+            System.out.println();
+            System.out.println();
+        }
+
+
+        //***ask user for size or default***
+        int ch2;
+        System.out.println("The default values for the test is 1000 arrays of each size");
+        System.out.println("The small size is 500, the medium is 2500, and the large is 5000");
+        do {
+            System.out.print("Do you want to use these values or input custom ones? (1 defualt, 2 for custom): ");
+            ch2 = scan.nextInt();
+        } while (ch2 < 1 || ch2 > 2);
+        System.out.println();
+        if (ch2 == 2) {
+            System.out.print("Enter the number of arrays to use: ");
+            arrCnt = scan.nextInt();
+            System.out.println();
+            System.out.print("Enter the length for the small arrays: ");
+            elCntSm = scan.nextInt();
+            System.out.println();
+            System.out.print("Enter the length for the medium arrays: ");
+            elCntMd = scan.nextInt();
+            System.out.println();
+            System.out.print("Enter the length for the large arrays: ");
+            elCntLg = scan.nextInt();
+            System.out.println();
+        } else {
+            arrCnt = 1000;
+            elCntSm = 500;
+            elCntMd = 2500;
+            elCntLg = 5000;
+        }
+        System.out.println();
+
+
+
 
         //create arrCnt number of arrays of each size
         ArrayList<int[]> arrays1 = returnArrays(arrCnt, elCntSm);
