@@ -5,7 +5,7 @@ public class Bubble {
 
     public Bubble() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Enter a number: ");
+        System.out.print("Enter a number of items to sort with the bubble sort: ");
         int x = scan.nextInt();
 
         //create array of size x and print it

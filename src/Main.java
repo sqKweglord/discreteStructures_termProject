@@ -7,8 +7,7 @@ import java.util.ArrayList;
 public class Main {
 
     //method to create all 1000 arrays at once so that they can be used with each sort
-    public static ArrayList<int[]> returnArrays(int a, int n) {
-        int amt = a;
+    public static ArrayList<int[]> returnArrays(int amt, int n) {
         ArrayList<int[]> arrays = new ArrayList<>(amt);
         for (int i = 0; i < amt; i++) {
             arrays.add(createArray(n));
@@ -28,17 +27,33 @@ public class Main {
 
 
     public static void main(String[] args) {
+        //test sorts
+        Bubble bub = new Bubble();
+        System.out.println();
+        System.out.println();
+        Selection sel = new Selection();
+        System.out.println();
+
+        //num of arrays in each arrayList
         int arrCnt = 1000;
 
-        ArrayList<int[]> arrays1 = returnArrays(arrCnt, 500);
-        ArrayList<int[]> arrays2 = returnArrays(arrCnt, 2500);
-        ArrayList<int[]> arrays3 = returnArrays(arrCnt, 5000);
+        //number of elements for small. medium, and large tests
+        int elCntSm = 500;
+        int elCntMd = 2500;
+        int elCntLg = 5000;
 
+        //create arrCnt number of arrays of each size
+        ArrayList<int[]> arrays1 = returnArrays(arrCnt, elCntSm);
+        ArrayList<int[]> arrays2 = returnArrays(arrCnt, elCntMd);
+        ArrayList<int[]> arrays3 = returnArrays(arrCnt, elCntLg);
+
+        //adds the arraylists to an arraylist that can be incremented through
         ArrayList<ArrayList<int[]>> allArrays = new ArrayList<>(3);
         allArrays.add(arrays1);
         allArrays.add(arrays2);
         allArrays.add(arrays3);
 
+        //copies arrrays to be used by the selection sort
         ArrayList<ArrayList<int[]>> allArraysAgain = new ArrayList<>(3);
 
         for (ArrayList<int[]> z : allArrays) {
@@ -53,83 +68,45 @@ public class Main {
             allArraysAgain.add(newList);
         }
 
-        /*
-        for (int x = 0; x < 10; x++) {
-            System.out.print(allArrays.get(2).get(980)[x] + "\s");
-        }
-        System.out.println();
-
-        for (int x = 0; x < 10; x++) {
-            System.out.print(allArraysAgain.get(2).get(980)[x] + "\s");
-        }
-        System.out.println();
-        System.out.println();
-        */
-
-
+        //try block to catch SortTypeException
         try {
 
             //intializes the sorts
             Sort[] sorts = new Sort[6];
             for (int i = 1; i < 7; i++) {
                 if (i < 4) {
-                    sorts[i-1] = new Sort((ArrayList<int[]>) allArrays.get(i-1), 1);
+                    sorts[i-1] = new Sort(allArrays.get(i-1), 1);
                 } else {
-                    sorts[i-1] = new Sort((ArrayList<int[]>) allArraysAgain.get(i-4), 2);
+                    sorts[i-1] = new Sort(allArraysAgain.get(i-4), 2);
                 }
 
             }
 
+            //creates a thread group
             ThreadGroup tg1 = new ThreadGroup("Sorts");
 
+            //creates the threads and assigns them the the thread group
             Thread[] threads = new Thread[6];
             for (int i = 0; i < 6; i++) {
                 threads[i] = new Thread(tg1, sorts[i]);
             }
 
-
-            /*
-            Sort[] sorts = new Sort[2];
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) {
-                    sorts[i-1] = new Sort(allArrays.get(0), 1);
-                } else {
-                    sorts[i-1] = new Sort((ArrayList<int[]>) allArraysAgain.get(0), 2);
-                }
-
-            }
-
-            Thread[] threads = new Thread[2];
-            for (int i = 0; i < 2; i++) {
-                threads[i] = new Thread(sorts[i]);
-            }
-            */
-
-
-
+            //starts the threads
             for (Thread t : threads) {
                 t.start();
             }
 
+            //loop to make the program wait for all threads to finish
             while (tg1.activeCount() > 0) {}
 
-            /*
-            int count;
-            do {
-                count = 0;
-                for (Thread t : threads) {
-                    if (!t.isAlive()) {
-                        count++;
-                    }
-                }
-            } while (count != 6);
-            */
-
+            //displays the info for each sort in the console
+            //will probably output to a csv here as well
             for (Sort s : sorts) {
                 System.out.print(s);
                 System.out.println("******************************");
             }
 
+          //prints the stacktrace if a SortTypeException occurs
         } catch (SortTypeException e) {
            e.printStackTrace();
         }
