@@ -8,12 +8,14 @@ public class Bubble {
         System.out.print("Enter a number: ");
         int x = scan.nextInt();
 
+        //create array of size x and print it
         int[] arr = createArray(x);
         for (int num : arr) {
             System.out.print(num + "\s");
         }
         System.out.println();
 
+        //sort the array and print the sorted values
         arr = bubble(arr);
         for (int num : arr) {
             System.out.print(num + "\s");

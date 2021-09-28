@@ -1,18 +1,23 @@
 import java.util.ArrayList;
 import java.time.Duration;
 import java.time.Instant;
-
 import static java.time.Duration.ZERO;
 
 public class Sort implements Runnable {
 
-    ArrayList<int[]> arrays;
+    //arraylist of all arrays to be sorted by the instance
+    private ArrayList<int[]> arrays;
 
     //type of sort to perform, 1 for bubble, 2 for select
-    int sortType;
+    private int sortType;
 
-    Duration totalTime = ZERO;
+    //total time to sort all arrays
+    private Duration totalTime = ZERO;
 
+    //average time of sorting arrays
+    private float avgTime;
+
+    //intializes the object to the chosen sort type with the arrays to be sorted
     public Sort(ArrayList<int[]> arrs, int n) throws SortTypeException {
         arrays = arrs;
         if (n < 1 || n > 2) {
@@ -22,8 +27,28 @@ public class Sort implements Runnable {
         }
     }
 
+    //sets the average time
+    private void setAvg() {
+        if (arrays != null) {
+            avgTime = (float)totalTime.toMillis() / arrays.size();
+        }
+    }
+
+    //methods to return class attributes
+    public float getAvgTime() {
+        return avgTime;
+    }
+
+    public int getSortType() {
+        return sortType;
+    }
+
+    public Duration getTotalTime() {
+        return totalTime;
+    }
+
     //method to bubble sort
-    public void bubble(int[] array) {
+    private void bubble(int[] array) {
         int n = array.length;
 
         for (int j = n; j > 0; j--) {
@@ -35,11 +60,10 @@ public class Sort implements Runnable {
                 }
             }
         }
-        //return array;
     }
 
     //method to selection sort
-    public void selection(int[] array) {
+    private void selection(int[] array) {
         int i,j;
         int iMin;
         for(j = 0; j < array.length; j++){
@@ -57,9 +81,9 @@ public class Sort implements Runnable {
                 array[iMin] = temp;
             }
         }
-        //return array;
     }
 
+    //run method for multithreading,
     @Override
     public void run() {
         switch (sortType) {
@@ -80,24 +104,10 @@ public class Sort implements Runnable {
                 }
                 break;
         }
-
-        /*
-        System.out.println("Elements in a single array: " + (arrays.get(0).length));
-        //System.out.println("Total Number of items sorted: " + (arrays.get(0).length * 1000));
-        //System.out.println();
-        if (sortType == 1) {
-            System.out.println("Sort is BUBBLE");
-            System.out.println("Total time: " + totalTime.toMillis() + " milliseconds");
-            System.out.println("Average time: " + (float) totalTime.toMillis() / 1000 + " milliseconds");
-        } else {
-            System.out.println("Sort is SELECT");
-            System.out.println("Total time: " + totalTime.toMillis() + " milliseconds");
-            System.out.println("Average time: " + (float) totalTime.toMillis() / 1000 + " milliseconds");
-        }
-        */
-
+        setAvg();
     }
 
+    //toString to ensure all sort objects have the same output format
     @Override
     public String toString() {
         String msg;
@@ -106,7 +116,7 @@ public class Sort implements Runnable {
         } else {
             msg = "SELECT";
         }
-        msg = msg + ("\nElements in a single array: " + (arrays.get(0).length)) + ("\nTotal time: " + totalTime.toMillis() + " milliseconds") + ("\nAverage Time: " + (float) totalTime.toMillis() / 1000 + " milliseconds\n");
+        msg = msg + ("\nElements in a single array: " + (arrays.get(0).length)) + ("\nTotal time: " + totalTime.toMillis() + " milliseconds") + ("\nAverage Time: " + avgTime + " milliseconds\n");
 
         return msg;
     }

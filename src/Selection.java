@@ -8,20 +8,22 @@ public class Selection {
         System.out.print("Enter a number: ");
         int x = scan.nextInt();
 
+        //create an array of size x and print it
         int[] arr = createArray(x);
         for (int num : arr) {
             System.out.print(num + "\s");
         }
         System.out.println();
 
-        arr = selection(arr);
+        //sort the array and print sorted values
+        selection(arr);
         for (int num : arr) {
             System.out.print(num + "\s");
         }
     }
 
     //method to generate a random array of a specified size
-    public int[] createArray(int size) {
+    private int[] createArray(int size) {
         Random rand = new Random();
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {
@@ -30,7 +32,8 @@ public class Selection {
         return array;
     }
 
-    public int[] selection(int[] array) {
+    //method to selection sort
+    private int[] selection(int[] array) {
         int i,j;
         int iMin;
         for(j = 0; j < array.length; j++){
