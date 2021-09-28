@@ -49,9 +49,7 @@ public class Sort implements Runnable {
 
     //method to bubble sort
     private void bubble(int[] array) {
-        int n = array.length;
-
-        for (int j = n; j > 0; j--) {
+        for (int j = array.length; j > 0; j--) {
             for (int i = 1; i < j; i++) {
                 if (array[i - 1] > array[i]) {
                     int temp = array[i];

@@ -60,7 +60,7 @@ public class Main {
         allArrays.add(arrays2);
         allArrays.add(arrays3);
 
-        //copies arrrays to be used by the selection sort
+        //copies arrays to be used by the selection sort
         ArrayList<ArrayList<int[]>> allArraysAgain = new ArrayList<>(3);
 
         for (ArrayList<int[]> z : allArrays) {
