@@ -78,9 +78,11 @@ public class Main {
 
             }
 
+            ThreadGroup tg1 = new ThreadGroup("Sorts");
+
             Thread[] threads = new Thread[6];
             for (int i = 0; i < 6; i++) {
-                threads[i] = new Thread(sorts[i]);
+                threads[i] = new Thread(tg1, sorts[i]);
             }
 
 
@@ -102,10 +104,14 @@ public class Main {
             */
 
 
+
             for (Thread t : threads) {
                 t.start();
             }
 
+            while (tg1.activeCount() > 0) {}
+
+            /*
             int count;
             do {
                 count = 0;
@@ -115,7 +121,7 @@ public class Main {
                     }
                 }
             } while (count != 6);
-
+            */
 
             for (Sort s : sorts) {
                 System.out.print(s);
