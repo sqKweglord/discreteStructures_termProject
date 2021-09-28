@@ -20,24 +20,31 @@ public class Main {
         Random rand = new Random();
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {
-            array[i] = rand.nextInt(10000);
+            array[i] = rand.nextInt(15000);
         }
         return array;
     }
 
 
     public static void main(String[] args) {
+        //***ask the user if the want to test the sorts***
+
         //test sorts
-        Bubble bub = new Bubble();
+        new Bubble();
         System.out.println();
         System.out.println();
-        Selection sel = new Selection();
+        new Selection();
         System.out.println();
+        System.out.println();
+
+        //***ask user for size or default***
 
         //num of arrays in each arrayList
         int arrCnt = 1000;
 
-        //number of elements for small. medium, and large tests
+        //***ask user for size or default***
+
+        //elements count(elCnt) for small(Sm), medium(Md), and large(Lg) tests
         int elCntSm = 500;
         int elCntMd = 2500;
         int elCntLg = 5000;
@@ -99,12 +106,16 @@ public class Main {
             //loop to make the program wait for all threads to finish
             while (tg1.activeCount() > 0) {}
 
+            //***print arrCnt***
+
             //displays the info for each sort in the console
             //will probably output to a csv here as well
             for (Sort s : sorts) {
                 System.out.print(s);
                 System.out.println("******************************");
             }
+
+            //***ask user if they want to output to a csv***
 
           //prints the stacktrace if a SortTypeException occurs
         } catch (SortTypeException e) {
