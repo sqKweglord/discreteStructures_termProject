@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -26,8 +29,39 @@ public class Main {
         return array;
     }
 
+    public static void bubble(long[] array) {
+        int n = array.length;
+
+        for (int j = n; j > 0; j--) {
+            for (int i = 1; i < j; i++) {
+                if (array[i - 1] > array[i]) {
+                    long temp = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void bubble(float[] array) {
+        int n = array.length;
+
+        for (int j = n; j > 0; j--) {
+            for (int i = 1; i < j; i++) {
+                if (array[i - 1] > array[i]) {
+                    float temp = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
+                }
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
+        //PrintWriter if needed to output to csv
+        PrintWriter pw = null;
+
         //num of arrays in each arrayList
         int arrCnt;
 
@@ -100,8 +134,6 @@ public class Main {
         System.out.println();
 
 
-
-
         //create arrCnt number of arrays of each size
         ArrayList<int[]> arrays1 = returnArrays(arrCnt, elCntSm);
         ArrayList<int[]> arrays2 = returnArrays(arrCnt, elCntMd);
@@ -131,13 +163,13 @@ public class Main {
         //try block to catch SortTypeException
         try {
 
-            //intializes the sorts
+            //initializes the sorts
             Sort[] sorts = new Sort[6];
             for (int i = 1; i < 7; i++) {
                 if (i < 4) {
-                    sorts[i-1] = new Sort(allArrays.get(i-1), 1);
+                    sorts[i - 1] = new Sort(allArrays.get(i - 1), 1);
                 } else {
-                    sorts[i-1] = new Sort(allArraysAgain.get(i-4), 2);
+                    sorts[i - 1] = new Sort(allArraysAgain.get(i - 4), 2);
                 }
 
             }
@@ -157,7 +189,8 @@ public class Main {
             }
 
             //loop to make the program wait for all threads to finish
-            while (tg1.activeCount() > 0) {}
+            while (tg1.activeCount() > 0) {
+            }
 
             //***print arrCnt***
             System.out.println("Amount of arrays tested: " + arrCnt);
@@ -170,12 +203,80 @@ public class Main {
                 System.out.println("******************************");
             }
 
+            System.out.println();
+
             //***ask user if they want to output to a csv***
+            loop = true;
+            do {
+                scan.reset();
+                System.out.print("Do you want to output the results to a csv? (y/n): ");
+                ch1 = scan.next();
+                if (ch1.equalsIgnoreCase("y") || ch1.equalsIgnoreCase("n")) {
+                    loop = false;
+                }
+            } while (loop);
+            if (ch1.equalsIgnoreCase("y")) {
+                long[] bubTot = new long[3];
+                float[] bubAvg = new float[3];
+
+                long[] selTot = new long[3];
+                float[] selAvg = new float[3];
+
+                int c1 = 0;
+                int c2 = 0;
+                int c3 = 0;
+                int c4 = 0;
+
+                for (Sort sort : sorts) {
+                    if (sort.getSortType() == 1) {
+                        bubTot[c1] = sort.getTotalTime().toMillis();
+                        c1++;
+                        bubAvg[c2] = sort.getAvgTime();
+                        c2++;
+                    }
+                    if (sort.getSortType() == 2) {
+                        selTot[c3] = sort.getTotalTime().toMillis();
+                        c3++;
+                        selAvg[c4] = sort.getAvgTime();
+                        c4++;
+                    }
+                }
+
+                bubble(bubTot);
+                bubble(selTot);
+                bubble(bubAvg);
+                bubble(selAvg);
 
 
-          //prints the stacktrace if a SortTypeException occurs
-        } catch (SortTypeException e) {
-           e.printStackTrace();
+                File results = new File("results.csv");
+                pw = new PrintWriter(results);
+                pw.println("Value type,"+elCntSm+","+elCntMd+","+elCntLg);
+                pw.print("bubble total,");
+                for (long x : bubTot) {
+                    pw.print(x+",");
+                }
+                pw.println();
+                pw.print("Selection Total,");
+                for (long x : selTot) {
+                    pw.print(x+",");
+                }
+                pw.println();
+                pw.print("bubble Average,");
+                for (float x : bubAvg) {
+                    pw.print(x+",");
+                }
+                pw.println();
+                pw.print("Selection Average,");
+                for (float x : selAvg) {
+                    pw.print(x+",");
+                }
+            }
+
+            //prints the stacktrace if a SortTypeException occurs
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pw != null) {pw.close();}
         }
     }
 }

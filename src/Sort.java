@@ -8,6 +8,8 @@ public class Sort implements Runnable {
     //arraylist of all arrays to be sorted by the instance
     private ArrayList<int[]> arrays;
 
+    private int arrLen;
+
     //type of sort to perform, 1 for bubble, 2 for select
     private int sortType;
 
@@ -20,6 +22,7 @@ public class Sort implements Runnable {
     //intializes the object to the chosen sort type with the arrays to be sorted
     public Sort(ArrayList<int[]> arrs, int n) throws SortTypeException {
         arrays = arrs;
+        arrLen = arrays.get(0).length;
         if (n < 1 || n > 2) {
             throw new SortTypeException( n + ": Not a valid sort");
         } else {
@@ -45,6 +48,10 @@ public class Sort implements Runnable {
 
     public Duration getTotalTime() {
         return totalTime;
+    }
+
+    public int getArrLen() {
+        return arrLen;
     }
 
     //method to bubble sort
