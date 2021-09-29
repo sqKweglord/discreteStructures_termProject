@@ -28,7 +28,7 @@ public class Main {
         //***ask the user if the want to test the sorts***
         do {
             scan.reset();
-            System.out.print("Do you want to test the sorting algorithms before doing the big test? (y/n): ");
+            System.out.print("Do you want to test the sorting algorithms before performing the main test? (y/n): ");
             ch1 = scan.next();
             if (ch1.equalsIgnoreCase("y") || ch1.equalsIgnoreCase("n")) {
                 loop = false;

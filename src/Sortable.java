@@ -59,7 +59,7 @@ public class Sortable implements Runnable {
 
 
 
-    //run method for multithreading,
+    //run method for multithreading
     @Override
     public void run() {
         switch (sortType) {
