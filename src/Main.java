@@ -6,6 +6,27 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Class: Main
+ * @Author Harrison Brown
+ * @Version 3.0?
+ * Class: CSE 2300 Section 1
+ * Started Writing: 09/15/2021
+ * Version Date: 09/29/2021
+ *
+ * Required system classes
+ * SortTypeException
+ * Bubble
+ * Selection
+ * Sorter
+ * Sortable
+ *
+ * Description:
+ * A program to compare the efficiency of the Bubble Sort to the efficiency of the Selection Sort
+ * The program allows the user to test the sort algorithms before executing the primary test
+ * The program will compute the total time for each sort as well as the average
+ * The user will be able to send the results to a csv if they choose to
+ */
 
 public class Main {
 
@@ -44,10 +65,8 @@ public class Main {
             System.out.println();
             new Selection();
             System.out.println();
-            System.out.println();
-        } else {
-            System.out.println();
         }
+        System.out.println();
 
         //***ask user for size or default***
         String ch2;

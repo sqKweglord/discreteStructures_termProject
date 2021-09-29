@@ -1,5 +1,3 @@
-//a class to demonstrate the functionality of the selection sort
-
 import java.util.Scanner;
 
 /**
