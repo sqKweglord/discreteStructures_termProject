@@ -4,33 +4,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//use the same arrays for each sort for a better test
-//multi thread to run both sorts at once
-//do all iterations with a single run of the main
+
 public class Main {
-
-    //method to create all 1000 arrays at once so that they can be used with each sort
-    public static ArrayList<int[]> returnArrays(int amt, int n) {
-        ArrayList<int[]> arrays = new ArrayList<>(amt);
-        for (int i = 0; i < amt; i++) {
-            arrays.add(Sorter.createArray(n));
-        }
-        return arrays;
-    }
-
-    /*
-    //method to generate a random array of a specified size
-    public static int[] createArray(int size) {
-        Random rand = new Random();
-        int[] array = new int[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = rand.nextInt(15000);
-        }
-        return array;
-    }
-*/
-
-
 
     public static void main(String[] args) {
         //PrintWriter if needed to output to csv
@@ -38,8 +13,6 @@ public class Main {
 
         //num of arrays in each arrayList
         int arrCnt;
-
-        //***ask user for size or default***
 
         //elements count(elCnt) for small(Sm), medium(Md), and large(Lg) tests
         int elCntSm;
@@ -107,11 +80,12 @@ public class Main {
         }
         System.out.println();
 
+        //***generate all arrays and arraylists for test***
 
-        //create arrCnt number of arrays of each size
-        ArrayList<int[]> arrays1 = returnArrays(arrCnt, elCntSm);
-        ArrayList<int[]> arrays2 = returnArrays(arrCnt, elCntMd);
-        ArrayList<int[]> arrays3 = returnArrays(arrCnt, elCntLg);
+        // create arrCnt number of arrays of each size
+        ArrayList<int[]> arrays1 = Sorter.returnArrays(arrCnt, elCntSm);
+        ArrayList<int[]> arrays2 = Sorter.returnArrays(arrCnt, elCntMd);
+        ArrayList<int[]> arrays3 = Sorter.returnArrays(arrCnt, elCntLg);
 
         //adds the arraylists to an arraylist that can be incremented through
         ArrayList<ArrayList<int[]>> allArrays = new ArrayList<>(3);
@@ -134,7 +108,9 @@ public class Main {
             allArraysAgain.add(newList);
         }
 
-        //try block to catch SortTypeException
+        //***execute sorts***
+
+        //try block to catch SortTypeException or IOException
         try {
 
             //initializes the sorts
@@ -189,6 +165,9 @@ public class Main {
                     loop = false;
                 }
             } while (loop);
+
+            //***output to csv***
+
             if (ch1.equalsIgnoreCase("y")) {
                 long[] bubTot = new long[3];
                 float[] bubAvg = new float[3];

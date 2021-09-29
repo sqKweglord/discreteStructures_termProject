@@ -6,7 +6,7 @@ public class Selection {
 
     public Selection() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Enter a number of items to sort with the selection sort: ");
+        System.out.print("Enter the number of items to sort with the selection sort: ");
         int x = scan.nextInt();
 
         //create an array of size x and print it

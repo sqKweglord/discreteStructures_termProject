@@ -1,4 +1,5 @@
-// a utility class to hold all sorts and the random array generation
+//a utility class to hold all sorts and the random array generation
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Sorter {
@@ -117,6 +118,15 @@ public class Sorter {
             array[i] = rand.nextInt(15000);
         }
         return array;
+    }
+
+    //method to create all 1000 arrays at once so that they can be used with each sort
+    public static ArrayList<int[]> returnArrays(int amt, int n) {
+        ArrayList<int[]> arrays = new ArrayList<>(amt);
+        for (int i = 0; i < amt; i++) {
+            arrays.add(createArray(n));
+        }
+        return arrays;
     }
 
 }
