@@ -143,7 +143,7 @@ public class Main {
             }
 
             //***print arrCnt***
-            System.out.println("Amount of arrays tested: " + arrCnt);
+            System.out.println("Amount of arrays tested per sort: " + arrCnt);
             System.out.println();
 
             //displays the info for each sort in the console
