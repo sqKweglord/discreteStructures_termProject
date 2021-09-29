@@ -3,7 +3,7 @@ import java.time.Duration;
 import java.time.Instant;
 import static java.time.Duration.ZERO;
 
-public class Sort implements Runnable {
+public class Sortable implements Runnable {
 
     //arraylist of all arrays to be sorted by the instance
     private ArrayList<int[]> arrays;
@@ -20,7 +20,7 @@ public class Sort implements Runnable {
     private float avgTime;
 
     //intializes the object to the chosen sort type with the arrays to be sorted
-    public Sort(ArrayList<int[]> arrs, int n) throws SortTypeException {
+    public Sortable(ArrayList<int[]> arrs, int n) throws SortTypeException {
         arrays = arrs;
         arrLen = arrays.get(0).length;
         if (n < 1 || n > 2) {
@@ -54,39 +54,7 @@ public class Sort implements Runnable {
         return arrLen;
     }
 
-    //method to bubble sort
-    private void bubble(int[] array) {
-        for (int j = array.length; j > 0; j--) {
-            for (int i = 1; i < j; i++) {
-                if (array[i - 1] > array[i]) {
-                    int temp = array[i];
-                    array[i] = array[i - 1];
-                    array[i - 1] = temp;
-                }
-            }
-        }
-    }
 
-    //method to selection sort
-    private void selection(int[] array) {
-        int i,j;
-        int iMin;
-        for(j = 0; j < array.length; j++){
-            iMin = j;
-
-            for ( i = j+1; i < array.length; i++) {
-                if (array[i] < array[iMin]) {
-                    iMin = i;
-                }
-            }
-
-            if ( iMin != j ) {
-                int temp = array[j];
-                array[j] = array[iMin];
-                array[iMin] = temp;
-            }
-        }
-    }
 
     //run method for multithreading,
     @Override
@@ -95,7 +63,7 @@ public class Sort implements Runnable {
             case 1:
                 for (int[] arr : arrays) {
                     Instant start = Instant.now();
-                    bubble(arr);
+                    Sorter.bubble(arr);
                     Instant end = Instant.now();
                     totalTime = totalTime.plus(Duration.between(start, end));
                 }
@@ -103,7 +71,7 @@ public class Sort implements Runnable {
             case 2:
                 for (int[] arr : arrays) {
                     Instant start = Instant.now();
-                    selection(arr);
+                    Sorter.selection(arr);
                     Instant end = Instant.now();
                     totalTime = totalTime.plus(Duration.between(start, end));
                 }

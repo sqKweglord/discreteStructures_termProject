@@ -14,11 +14,12 @@ public class Main {
     public static ArrayList<int[]> returnArrays(int amt, int n) {
         ArrayList<int[]> arrays = new ArrayList<>(amt);
         for (int i = 0; i < amt; i++) {
-            arrays.add(createArray(n));
+            arrays.add(Sorter.createArray(n));
         }
         return arrays;
     }
 
+    /*
     //method to generate a random array of a specified size
     public static int[] createArray(int size) {
         Random rand = new Random();
@@ -28,34 +29,8 @@ public class Main {
         }
         return array;
     }
+*/
 
-    public static void bubble(long[] array) {
-        int n = array.length;
-
-        for (int j = n; j > 0; j--) {
-            for (int i = 1; i < j; i++) {
-                if (array[i - 1] > array[i]) {
-                    long temp = array[i];
-                    array[i] = array[i - 1];
-                    array[i - 1] = temp;
-                }
-            }
-        }
-    }
-
-    public static void bubble(float[] array) {
-        int n = array.length;
-
-        for (int j = n; j > 0; j--) {
-            for (int i = 1; i < j; i++) {
-                if (array[i - 1] > array[i]) {
-                    float temp = array[i];
-                    array[i] = array[i - 1];
-                    array[i - 1] = temp;
-                }
-            }
-        }
-    }
 
 
     public static void main(String[] args) {
@@ -164,12 +139,12 @@ public class Main {
         try {
 
             //initializes the sorts
-            Sort[] sorts = new Sort[6];
+            Sortable[] sorts = new Sortable[6];
             for (int i = 1; i < 7; i++) {
                 if (i < 4) {
-                    sorts[i - 1] = new Sort(allArrays.get(i - 1), 1);
+                    sorts[i - 1] = new Sortable(allArrays.get(i - 1), 1);
                 } else {
-                    sorts[i - 1] = new Sort(allArraysAgain.get(i - 4), 2);
+                    sorts[i - 1] = new Sortable(allArraysAgain.get(i - 4), 2);
                 }
 
             }
@@ -198,7 +173,7 @@ public class Main {
 
             //displays the info for each sort in the console
             //will probably output to a csv here as well
-            for (Sort s : sorts) {
+            for (Sortable s : sorts) {
                 System.out.print(s);
                 System.out.println("******************************");
             }
@@ -227,7 +202,7 @@ public class Main {
                 int c3 = 0;
                 int c4 = 0;
 
-                for (Sort sort : sorts) {
+                for (Sortable sort : sorts) {
                     if (sort.getSortType() == 1) {
                         bubTot[c1] = sort.getTotalTime().toMillis();
                         c1++;
@@ -242,10 +217,10 @@ public class Main {
                     }
                 }
 
-                bubble(bubTot);
-                bubble(selTot);
-                bubble(bubAvg);
-                bubble(selAvg);
+                Sorter.bubble(bubTot);
+                Sorter.bubble(selTot);
+                Sorter.bubble(bubAvg);
+                Sorter.bubble(selAvg);
 
 
                 File results = new File("results.csv");
