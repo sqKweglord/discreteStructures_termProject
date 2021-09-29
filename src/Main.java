@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 
 public class Main {
 
@@ -48,18 +50,23 @@ public class Main {
         }
 
         //***ask user for size or default***
-        int ch2;
+        String ch2;
         System.out.println("The default values for the test is 1000 arrays of each size");
         System.out.println("The small size is 500, the medium is 2500, and the large is 5000");
         do {
             scan.reset();
             System.out.print("Do you want to use these values or input custom ones? (1 default, 2 for custom): ");
-            ch2 = scan.nextInt();
+            ch2 = scan.next();
             scan.reset();
-        } while (ch2 < 1 || ch2 > 2);
+            try {
+                loop = parseInt(ch2) < 1 || parseInt(ch2) > 2;
+            } catch (NumberFormatException e) {
+                loop = true;
+            }
+        } while (loop);
 
         System.out.println();
-        if (ch2 == 2) {
+        if (parseInt(ch2) == 2) {
             System.out.print("Enter the number of arrays to use: ");
             arrCnt = scan.nextInt();
             scan.reset();
