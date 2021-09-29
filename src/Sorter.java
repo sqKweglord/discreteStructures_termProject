@@ -1,6 +1,20 @@
-//a utility class to hold all sorts and the random array generation
 import java.util.ArrayList;
 import java.util.Random;
+
+/**
+ * Class: Sorter
+ * @Author Harrison Brown
+ * @Version 1
+ *
+ * Started Writing:
+ * Version Date:
+ *
+ * description:
+ * The Sorter class contains most of the sorting functionality of the system
+ * It has methods for each sort with various data types supported
+ * It also contains the methods to generate the random arrays
+ * Because of the frequency of their use, they are static so that all classes can use them without needing imports
+ */
 
 public class Sorter {
 

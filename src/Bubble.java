@@ -1,5 +1,18 @@
-//a class to demonstrate the functionality of the bubble sort
 import java.util.Scanner;
+
+/**
+ * Class: Bubble
+ * @Author Harrison Brown
+ * @Version 2
+ *
+ * Started Writing:
+ * Version Date:
+ *
+ * Description:
+ * The uBbble class allows the user to test just the bubble sort algorithm
+ * It takes in a user generated value for the number of value to sort,
+ * then displays the array before and after being sorted
+ */
 
 public class Bubble {
 

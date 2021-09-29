@@ -1,10 +1,20 @@
-//the class to be ran in threads to perform all sorts at once
-//stores the sort type, length of the arrays, total time and average time as variables that can be returned
-
 import java.util.ArrayList;
 import java.time.Duration;
 import java.time.Instant;
 import static java.time.Duration.ZERO;
+
+/**
+ * Class: Sortable
+ * @Author Harrison Brown
+ * @Version 2
+ *
+ * Started Writing:
+ * Version Date:
+ *
+ * Description:
+ * The Sortable class allows for seperate threads to be use to preform multiple sorts at once
+ * The class stores the average time, total time, type of sort, and length of the array to be accessed later
+ */
 
 public class Sortable implements Runnable {
 
