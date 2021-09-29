@@ -39,13 +39,21 @@ public class Main {
         int elCntLg;
 
         String ch1;
+        boolean loop = true;
         Scanner scan = new Scanner(System.in);
 
         //***ask the user if the want to test the sorts***
         do {
+            scan.reset();
             System.out.print("Do you want to test the sorting algorithms before doing the big test? (y/n): ");
             ch1 = scan.next();
-        } while (!ch1.equals("y") || !ch1.equals("n"));
+            if (ch1.equalsIgnoreCase("y") || ch1.equalsIgnoreCase("n")) {
+                loop = false;
+            }
+        } while (loop);
+
+        scan.reset();
+
         if (ch1.equals("y")) {
             //test sorts
             new Bubble();
@@ -62,22 +70,29 @@ public class Main {
         System.out.println("The default values for the test is 1000 arrays of each size");
         System.out.println("The small size is 500, the medium is 2500, and the large is 5000");
         do {
-            System.out.print("Do you want to use these values or input custom ones? (1 defualt, 2 for custom): ");
+            scan.reset();
+            System.out.print("Do you want to use these values or input custom ones? (1 default, 2 for custom): ");
             ch2 = scan.nextInt();
+            scan.reset();
         } while (ch2 < 1 || ch2 > 2);
+
         System.out.println();
         if (ch2 == 2) {
             System.out.print("Enter the number of arrays to use: ");
             arrCnt = scan.nextInt();
+            scan.reset();
             System.out.println();
             System.out.print("Enter the length for the small arrays: ");
             elCntSm = scan.nextInt();
+            scan.reset();
             System.out.println();
             System.out.print("Enter the length for the medium arrays: ");
             elCntMd = scan.nextInt();
+            scan.reset();
             System.out.println();
             System.out.print("Enter the length for the large arrays: ");
             elCntLg = scan.nextInt();
+            scan.reset();
             System.out.println();
         } else {
             arrCnt = 1000;
@@ -148,6 +163,8 @@ public class Main {
             while (tg1.activeCount() > 0) {}
 
             //***print arrCnt***
+            System.out.println("Amount of arrays tested: " + arrCnt);
+            System.out.println();
 
             //displays the info for each sort in the console
             //will probably output to a csv here as well
@@ -157,6 +174,7 @@ public class Main {
             }
 
             //***ask user if they want to output to a csv***
+
 
           //prints the stacktrace if a SortTypeException occurs
         } catch (SortTypeException e) {
