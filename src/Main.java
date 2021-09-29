@@ -250,7 +250,7 @@ public class Main {
 
                 File results = new File("results.csv");
                 pw = new PrintWriter(results);
-                pw.println("Value type,"+elCntSm+","+elCntMd+","+elCntLg);
+                pw.println("Array Size,"+elCntSm+","+elCntMd+","+elCntLg);
                 pw.print("bubble total,");
                 for (long x : bubTot) {
                     pw.print(x+",");
