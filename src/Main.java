@@ -62,8 +62,9 @@ public class Main {
             new Selection();
             System.out.println();
             System.out.println();
+        } else {
+            System.out.println();
         }
-
 
         //***ask user for size or default***
         int ch2;
@@ -81,19 +82,15 @@ public class Main {
             System.out.print("Enter the number of arrays to use: ");
             arrCnt = scan.nextInt();
             scan.reset();
-            System.out.println();
             System.out.print("Enter the length for the small arrays: ");
             elCntSm = scan.nextInt();
             scan.reset();
-            System.out.println();
             System.out.print("Enter the length for the medium arrays: ");
             elCntMd = scan.nextInt();
             scan.reset();
-            System.out.println();
             System.out.print("Enter the length for the large arrays: ");
             elCntLg = scan.nextInt();
             scan.reset();
-            System.out.println();
         } else {
             arrCnt = 1000;
             elCntSm = 500;
