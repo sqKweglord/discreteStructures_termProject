@@ -1,3 +1,6 @@
+//the class to be ran in threads to perform all sorts at once
+//stores the sort type, length of the arrays, total time and average time as variables that can be returned
+
 import java.util.ArrayList;
 import java.time.Duration;
 import java.time.Instant;

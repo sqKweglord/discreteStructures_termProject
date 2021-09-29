@@ -1,8 +1,7 @@
+// a utility class to hold all sorts and the random array generation
 import java.util.Random;
 
 public class Sorter {
-
-    public Sorter(){}
 
     //bubble int
     public static void bubble(int[] array) {
@@ -119,7 +118,5 @@ public class Sorter {
         }
         return array;
     }
-
-
 
 }

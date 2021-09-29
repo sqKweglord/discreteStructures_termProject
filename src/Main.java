@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Random;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -248,8 +247,12 @@ public class Main {
             }
 
             //prints the stacktrace if a SortTypeException occurs
-        } catch (Exception e) {
+        } catch (SortTypeException e) {
+            System.out.println("Error with sortType");
             e.printStackTrace();
+        } catch (IOException x) {
+            System.out.println("IO Error");
+            x.printStackTrace();
         } finally {
             if (pw != null) {pw.close();}
         }

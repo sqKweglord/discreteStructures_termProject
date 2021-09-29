@@ -1,4 +1,4 @@
-import java.util.Random;
+//a class to demonstrate the functionality of the bubble sort
 import java.util.Scanner;
 
 public class Bubble {
