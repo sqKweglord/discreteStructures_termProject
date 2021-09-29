@@ -9,7 +9,7 @@ import static java.lang.Integer.parseInt;
 /**
  * Class: Main
  * @Author Harrison Brown
- * @Version 3.0?
+ * @Version 3.0
  * Class: CSE 2300 Section 1
  * Started Writing: 09/15/2021
  * Version Date: 09/29/2021

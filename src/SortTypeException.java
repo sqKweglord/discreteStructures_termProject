@@ -1,7 +1,7 @@
 /**
  * Class: SortTypeException
  * @Author Harrison Brown
- * @Version 1
+ * @Version 1.1
  * Started Writing:
  * Version Date:
  *
@@ -10,9 +10,6 @@
  */
 
 public class SortTypeException extends Exception {
-
-    public SortTypeException() {}
-
     public SortTypeException(String msg) {
         super(msg);
     }
