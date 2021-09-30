@@ -2,23 +2,19 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
-
+/**
+ * @author Harrison Brown
+ * @version 2
+ */
 public class TestSort {
-
-
     /**
-     * @author Harrison Brown
-     * @version 2
+     * A method to test the sort algorithms
+     * <p>
+     *     The method creates an instance of the "TestSort" class and prompts the user for a size
+     *     The method class other methods to generate an array of that size and sort it
+     *     The array is displayed before and after it is sorted so the user can verify the sort functions correctly
+     * </p>
      */
-
-        /**
-         * A method to test the sort algorithms
-         * <p>
-         *     The method creates an instance of the "TestSort" class and prompts the user for a size
-         *     The method class other methods to generate an array of that size and sort it
-         *     The array is displayed before and after it is sorted so the user can verify the sort functions correctly
-         * </p>
-         */
         public TestSort() {
 
             int[] arr1;
