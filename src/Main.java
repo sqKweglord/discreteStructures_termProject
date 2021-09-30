@@ -8,11 +8,11 @@ import static java.lang.Integer.parseInt;
 
 /**
  * Class: Main
- * @Author Harrison Brown
- * @Version 3.0
+ * @author Harrison Brown
+ * @version 3.0
  * Class: CSE 2300 Section 1
  * Started Writing: 09/15/2021
- * Version Date: 09/29/2021
+ * Project Date: 09/29/2021
  *
  * Required system classes
  * SortTypeException
@@ -22,28 +22,50 @@ import static java.lang.Integer.parseInt;
  * Sortable
  *
  * Description:
- * A program to compare the efficiency of the Bubble Sort to the efficiency of the Selection Sort
- * The program allows the user to test the sort algorithms before executing the primary test
- * The program will compute the total time for each sort as well as the average
- * The user will be able to send the results to a csv if they choose to
+ * A program to compare the efficiency of the Bubble Sort to the efficiency of the Selection Sort.
+ * The program allows the user to test the sort algorithms before executing the primary test.
+ * The program will compute the total time for each sort as well as the average.
+ * The user will be able to send the results to a csv if they choose to.
  */
-
 public class Main {
 
+    /**
+     * The "main" method that runs on execution
+     * <p>
+     *     The main is the primary method to execute the tests.
+     *     It prompts the user for a several options:
+     *          1. if they want to test the algorithms
+     *          2. use custom values instead of the default ones listed in the rubric
+     *          3. if they want to output to a csv
+     *
+     *     During runtime the method performs based on the users choices.
+     *     There are also several while loops and try-catch statements to validate user input
+     *     and ensure the program doesnt crash based on user input.
+     * @param args generic main arguments
+     */
     public static void main(String[] args) {
-        //PrintWriter if needed to output to csv
+        //A PrintWriter for if the user decides to output to a csv
         PrintWriter pw = null;
 
-        //num of arrays in each arrayList
+        //The amount of arrays for each sort method to sort
         int arrCnt;
 
-        //elements count(elCnt) for small(Sm), medium(Md), and large(Lg) tests
+        //The small length of arrays
         int elCntSm;
+
+        //The medium length of arrays
         int elCntMd;
+
+        //The large length of arrays
         int elCntLg;
 
+        //A String to store user input
         String ch1;
+
+        //a boolean to hold if while loops should continue looping
         boolean loop = true;
+
+        //a scanner instance
         Scanner scan = new Scanner(System.in);
 
         //***ask the user if the want to test the sorts***

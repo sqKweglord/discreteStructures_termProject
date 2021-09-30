@@ -2,20 +2,19 @@ import java.util.Scanner;
 
 /**
  * Class: Selection
- * @Author Harrison Brown
- * @Version 2
- *
- * Started Writing:
- * Version Date:
- *
- * Description:
- * The Selection class allows the user to test just the bubble sort algorithm
- * It takes in a user generated value for the number of value to sort,
- * then displays the array before and after being sorted
+ * @author Harrison Brown
+ * @version 2
  */
-
 public class Selection {
 
+    /**
+     * A method to test the Selection sort algorithm
+     * <p>
+     *     The method creates an instance of the "Bubble" class and prompts the user for a size
+     *     The method class other methods to generate an array of that size and sort it
+     *     The array is displayed before and after it is sorted so the user can verify the sort functions correctly
+     * </p>
+     */
     public Selection() {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter the number of items to sort with the selection sort: ");

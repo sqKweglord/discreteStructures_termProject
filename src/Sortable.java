@@ -4,35 +4,50 @@ import java.time.Instant;
 import static java.time.Duration.ZERO;
 
 /**
- * Class: Sortable
- * @Author Harrison Brown
- * @Version 2
- *
- * Started Writing:
- * Version Date:
- *
- * Description:
- * The Sortable class allows for seperate threads to be use to preform multiple sorts at once
- * The class stores the average time, total time, type of sort, and length of the array to be accessed later
+ * @author Harrison Brown
+ * @version 2
  */
-
 public class Sortable implements Runnable {
 
-    //arraylist of all arrays to be sorted by the instance
+    /**
+     * all of the arrays to be sorted
+     */
     private ArrayList<int[]> arrays;
 
+    /**
+     * The length of the arrays that will be sorted
+     */
     private int arrLen;
 
-    //type of sort to perform, 1 for bubble, 2 for select
+    /**
+     * The type of sort the instance is
+     * 1 for bubble, 2 for selection
+     */
     private int sortType;
 
-    //total time to sort all arrays
+    /**
+     * The total time for the sort to complete
+     */
     private Duration totalTime = ZERO;
 
-    //average time of sorting arrays
+    /**
+     * average time for all arrays to be sorted
+     */
     private float avgTime;
 
-    //intializes the object to the chosen sort type with the arrays to be sorted
+    /**
+     * Constructor to initialize an instance of Sortable
+     * <p>
+     *     creates an instance of the class using an arraylist and an int
+     *     the arraylist is the collection of arrays for the instance to sort
+     *     the int is the type of sort that needs to be preformed
+     *     1 = bubble sort
+     *     2 = Selection sort
+     * </p>
+     * @param arrs the arrayList containing the arrays to be sorted
+     * @param n an int designating the type of sort to be performed
+     * @throws SortTypeException errors if n isn't 1 or 2
+     */
     public Sortable(ArrayList<int[]> arrs, int n) throws SortTypeException {
         arrays = arrs;
         arrLen = arrays.get(0).length;
@@ -43,33 +58,55 @@ public class Sortable implements Runnable {
         }
     }
 
-    //sets the average time
+    /**
+     * sets the avgTime based on total time and the number of arrays that were sorted
+     */
     private void setAvg() {
         if (arrays != null) {
             avgTime = (float)totalTime.toMillis() / arrays.size();
         }
     }
 
-    //methods to return class attributes
+    /**
+     * returns the average time
+     * @return avgTime
+     */
     public float getAvgTime() {
         return avgTime;
     }
 
+    /**
+     * returns the type of sort
+     * @return sortType
+     */
     public int getSortType() {
         return sortType;
     }
 
+    /**
+     * returns the total time
+     * @return totalTime
+     */
     public Duration getTotalTime() {
         return totalTime;
     }
 
+    /**
+     * returns the size of length of arrays that were sorted
+     * @return arrLen
+     */
     public int getArrLen() {
         return arrLen;
     }
 
-
-
-    //run method for multithreading
+    /**
+     * overrides the run method from interface Runnable
+     * <p>
+     *     This method allows instances of this class to be run in parallel
+     *     This method is were the primary sort takes place
+     *     By multithreading the sorts, the total program execution is only limited by the longest sort
+     * </p>
+     */
     @Override
     public void run() {
         switch (sortType) {
@@ -93,7 +130,14 @@ public class Sortable implements Runnable {
         setAvg();
     }
 
-    //toString to ensure all sort objects have the same output format
+    /**
+     * The toString method for this class
+     * <p>
+     *     Overriding the toString allows the data to be displayed by printing the objects instead of calling the
+     *     getters.
+     * </p>
+     * @return a string that contains the needed info from the class
+     */
     @Override
     public String toString() {
         String msg;

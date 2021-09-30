@@ -2,23 +2,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Class: Sorter
- * @Author Harrison Brown
- * @Version 1
+ * @author Harrison Brown
+ * @version 1
  *
- * Started Writing:
- * Version Date:
- *
- * description:
- * The Sorter class contains most of the sorting functionality of the system
- * It has methods for each sort with various data types supported
- * It also contains the methods to generate the random arrays
- * Because of the frequency of their use, they are static so that all classes can use them without needing imports
+ * The Sorter class contains most of the sorting and randomizing functionality of the system
  */
 
 public class Sorter {
 
-    //bubble int
+    /**
+     * Bubble sort for ints
+     * @param array array to be sorted
+     */
     public static void bubble(int[] array) {
         for (int j = array.length; j > 0; j--) {
             for (int i = 1; i < j; i++) {
@@ -31,7 +26,10 @@ public class Sorter {
         }
     }
 
-    //selection int
+    /**
+     * Selection sort for ints
+     * @param array the array to be sorted
+     */
     public static void selection(int[] array) {
         int i,j;
         int iMin;
@@ -52,7 +50,10 @@ public class Sorter {
         }
     }
 
-    //bubble long
+    /**
+     * Bubble sort for longs
+     * @param array the array to be sorted
+     */
     public static void bubble(long[] array) {
         int n = array.length;
 
@@ -67,7 +68,10 @@ public class Sorter {
         }
     }
 
-    //bubble float
+    /**
+     * Bubble sort for floats
+     * @param array the array to be sorted
+     */
     public static void bubble(float[] array) {
         int n = array.length;
 
@@ -82,7 +86,10 @@ public class Sorter {
         }
     }
 
-    //selection long
+    /**
+     * Selection sort for longs
+     * @param array the array to be sorted
+     */
     public static void selection(long[] array) {
         int i,j;
         int iMin;
@@ -103,7 +110,10 @@ public class Sorter {
         }
     }
 
-    //selection float
+    /**
+     * Selection sort for floats
+     * @param array the array to be sorted
+     */
     public static void selection(float[] array) {
         int i,j;
         int iMin;
@@ -124,7 +134,11 @@ public class Sorter {
         }
     }
 
-    //method to generate a random array of a specified size
+    /**
+     * randomly generates an array of length size using 15,000 as the ceiling for the generated numbers
+     * @param size length to make the array
+     * @return randomly generated array of length size
+     */
     public static int[] createArray(int size) {
         Random rand = new Random();
         int[] array = new int[size];
@@ -134,7 +148,12 @@ public class Sorter {
         return array;
     }
 
-    //method to create all 1000 arrays at once so that they can be used with each sort
+    /**
+     * randomly generates a user input amount of random arrays and stores them in an arraylist
+     * @param amt the amount of arrays to make
+     * @param n the size each array should be
+     * @return an arraylist of amt int[] of length n
+     */
     public static ArrayList<int[]> returnArrays(int amt, int n) {
         ArrayList<int[]> arrays = new ArrayList<>(amt);
         for (int i = 0; i < amt; i++) {

@@ -1,15 +1,13 @@
 /**
- * Class: SortTypeException
- * @Author Harrison Brown
- * @Version 1.1
- * Started Writing:
- * Version Date:
- *
- * Description:
- * Exception for Sort class so that a value isn't input incorrectly when deciding which sort to execute
+ * @author Harrison Brown
+ * @version 1
  */
-
 public class SortTypeException extends Exception {
+
+    /**
+     * This method creates an exception of type SortTypeException with the provided string
+     * @param msg a string to overwrite the default message of exceptions
+     */
     public SortTypeException(String msg) {
         super(msg);
     }
