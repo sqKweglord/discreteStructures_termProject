@@ -150,6 +150,5 @@ public class Sortable implements Runnable {
 
         return msg;
     }
-
 }
 

@@ -13,19 +13,22 @@ import static java.lang.Integer.parseInt;
  * Class: CSE 2300 Section 1
  * Started Writing: 09/15/2021
  * Project Date: 09/29/2021
- *
- * Required system classes
- * SortTypeException
- * Bubble
- * Selection
- * Sorter
- * Sortable
- *
- * Description:
- * A program to compare the efficiency of the Bubble Sort to the efficiency of the Selection Sort.
- * The program allows the user to test the sort algorithms before executing the primary test.
- * The program will compute the total time for each sort as well as the average.
- * The user will be able to send the results to a csv if they choose to.
+ * Documentation date: 9/30/2021
+ *<p>
+ *      Required system classes:
+ *      SortTypeException
+ *      Bubble
+ *      Selection
+ *      Sorter
+ *      Sortable
+ *</p>
+ * <p>
+ *      System Description:
+ *      A program to compare the efficiency of the Bubble Sort to the efficiency of the Selection Sort.
+ *      The program allows the user to test the sort algorithms before executing the primary test.
+ *      The program will compute the total time for each sort as well as the average.
+ *      The user will be able to send the results to a csv if they choose to.
+ * </p>
  */
 public class Main {
 
@@ -48,16 +51,16 @@ public class Main {
         PrintWriter pw = null;
 
         //The amount of arrays for each sort method to sort
-        int arrCnt;
+        int arrCnt = 0;
 
         //The small length of arrays
-        int elCntSm;
+        int elCntSm = 0;
 
         //The medium length of arrays
-        int elCntMd;
+        int elCntMd = 0;
 
         //The large length of arrays
-        int elCntLg;
+        int elCntLg = 0;
 
         //A String to store user input
         String ch1;
@@ -108,18 +111,33 @@ public class Main {
 
         System.out.println();
         if (parseInt(ch2) == 2) {
-            System.out.print("Enter the number of arrays to use: ");
-            arrCnt = scan.nextInt();
-            scan.reset();
-            System.out.print("Enter the length for the small arrays: ");
-            elCntSm = scan.nextInt();
-            scan.reset();
-            System.out.print("Enter the length for the medium arrays: ");
-            elCntMd = scan.nextInt();
-            scan.reset();
-            System.out.print("Enter the length for the large arrays: ");
-            elCntLg = scan.nextInt();
-            scan.reset();
+            loop = true;
+            String ch3, ch4, ch5, ch6;
+            do {
+                System.out.print("Enter the number of arrays to use: ");
+                ch3 = scan.next();
+                scan.reset();
+                System.out.print("Enter the length for the small arrays: ");
+                ch4 = scan.next();
+                scan.reset();
+                System.out.print("Enter the length for the medium arrays: ");
+                ch5 = scan.next();
+                scan.reset();
+                System.out.print("Enter the length for the large arrays: ");
+                ch6 = scan.next();
+                scan.reset();
+                try {
+                    arrCnt = parseInt(ch3);
+                    elCntSm = parseInt(ch4);
+                    elCntMd = parseInt(ch5);
+                    elCntLg = parseInt(ch6);
+                    loop = false;
+                } catch (NumberFormatException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("Invalid value type, please try again");
+                    System.out.println();
+                }
+            }while (loop);
         } else {
             arrCnt = 1000;
             elCntSm = 500;
