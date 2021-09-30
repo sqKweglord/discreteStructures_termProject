@@ -85,17 +85,10 @@ public class Main {
         System.out.println();
         if (ch1.equals("y")) {
             //test sorts
-            /*
-            new Bubble();
-            System.out.println();
-            System.out.println();
-            new Selection();
-            System.out.println();
-            */
             new TestSort();
             System.out.println();
+            System.out.println();
         }
-        System.out.println();
 
         //***ask user for size or default***
         String ch2;
