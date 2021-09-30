@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * @author Harrison Brown
  * @version 2
@@ -16,8 +18,20 @@ public class Bubble {
      */
     public Bubble() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Enter the number of items to sort with the bubble sort: ");
-        int x = scan.nextInt();
+        String choice;
+        int x = 0;
+        boolean loop;
+
+        do {
+            System.out.print("Enter the number of items to sort with the bubble sort: ");
+            choice = scan.next();
+            try {
+                x = parseInt(choice);
+                loop = false;
+            } catch (NumberFormatException e) {
+                loop = true;
+            }
+        } while(loop);
 
         //create array of size x and print it
         int[] arr = Sorter.createArray(x);
