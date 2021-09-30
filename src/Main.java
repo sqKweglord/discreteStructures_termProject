@@ -82,13 +82,17 @@ public class Main {
         } while (loop);
 
         scan.reset();
-
+        System.out.println();
         if (ch1.equals("y")) {
             //test sorts
+            /*
             new Bubble();
             System.out.println();
             System.out.println();
             new Selection();
+            System.out.println();
+            */
+            new TestSort();
             System.out.println();
         }
         System.out.println();
