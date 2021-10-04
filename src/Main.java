@@ -162,11 +162,7 @@ public class Main {
         for (ArrayList<int[]> z : allArrays) {
             ArrayList<int[]> newList = new ArrayList<>(1000);
             for (int[] y : z) {
-                int[] newArray = new int[y.length];
-                for (int i = 0; i < y.length; i++) {
-                    newArray[i] = y[i];
-                }
-                newList.add(newArray);
+                newList.add(y.clone());
             }
             allArraysAgain.add(newList);
         }
@@ -194,16 +190,30 @@ public class Main {
             Thread[] threads = new Thread[6];
             for (int i = 0; i < 6; i++) {
                 threads[i] = new Thread(tg1, sorts[i]);
+                threads[i].start();
             }
+
+            //Thread[] ths2 = new Thread[6];
+            //tg1.enumerate(ths2);
+            //for
+
 
             //starts the threads
-            for (Thread t : threads) {
-                t.start();
+            try {
+                for (Thread t : threads) {
+                    t.join();
+                }
+            } catch (InterruptedException x) {
+                x.printStackTrace();
             }
 
+            /*
             //loop to make the program wait for all threads to finish
             while (tg1.activeCount() > 0) {
+                //loop body to stop the error that
+                loop = true;
             }
+             */
 
             //***print arrCnt***
             System.out.println("Amount of arrays tested per sort: " + arrCnt);
