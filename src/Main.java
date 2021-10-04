@@ -193,12 +193,7 @@ public class Main {
                 threads[i].start();
             }
 
-            //Thread[] ths2 = new Thread[6];
-            //tg1.enumerate(ths2);
-            //for
-
-
-            //starts the threads
+            //joins the threads
             try {
                 for (Thread t : threads) {
                     t.join();
@@ -206,14 +201,6 @@ public class Main {
             } catch (InterruptedException x) {
                 x.printStackTrace();
             }
-
-            /*
-            //loop to make the program wait for all threads to finish
-            while (tg1.activeCount() > 0) {
-                //loop body to stop the error that
-                loop = true;
-            }
-             */
 
             //***print arrCnt***
             System.out.println("Amount of arrays tested per sort: " + arrCnt);
