@@ -12,18 +12,18 @@ public class Sortable implements Runnable {
     /**
      * all of the arrays to be sorted
      */
-    private ArrayList<int[]> arrays;
+    private final ArrayList<int[]> arrays;
 
     /**
      * The length of the arrays that will be sorted
      */
-    private int arrLen;
+    private final int arrLen;
 
     /**
      * The type of sort the instance is
      * 1 for bubble, 2 for selection
      */
-    private int sortType;
+    private final int sortType;
 
     /**
      * The total time for the sort to complete
@@ -113,7 +113,7 @@ public class Sortable implements Runnable {
             case 1:
                 for (int[] arr : arrays) {
                     Instant start = Instant.now();
-                    Sorter.bubble(arr);
+                    Main.bubble(arr);
                     Instant end = Instant.now();
                     totalTime = totalTime.plus(Duration.between(start, end));
                 }
@@ -121,7 +121,7 @@ public class Sortable implements Runnable {
             case 2:
                 for (int[] arr : arrays) {
                     Instant start = Instant.now();
-                    Sorter.selection(arr);
+                    Main.selection(arr);
                     Instant end = Instant.now();
                     totalTime = totalTime.plus(Duration.between(start, end));
                 }

@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -43,7 +44,7 @@ public class Main {
      *
      *     During runtime the method performs based on the users choices.
      *     There are also several while loops and try-catch statements to validate user input
-     *     and ensure the program doesnt crash based on user input.
+     *     and ensure the program doesn't crash based on user input.
      * @param args generic main arguments
      */
     public static void main(String[] args) {
@@ -85,7 +86,7 @@ public class Main {
         System.out.println();
         if (ch1.equals("y")) {
             //test sorts
-            new TestSort();
+            TestSort();
             System.out.println();
             System.out.println();
         }
@@ -146,9 +147,9 @@ public class Main {
         //***generate all arrays and arraylists for test***
 
         // create arrCnt number of arrays of each size
-        ArrayList<int[]> arrays1 = Sorter.returnArrays(arrCnt, elCntSm);
-        ArrayList<int[]> arrays2 = Sorter.returnArrays(arrCnt, elCntMd);
-        ArrayList<int[]> arrays3 = Sorter.returnArrays(arrCnt, elCntLg);
+        ArrayList<int[]> arrays1 = returnArrays(arrCnt, elCntSm);
+        ArrayList<int[]> arrays2 = returnArrays(arrCnt, elCntMd);
+        ArrayList<int[]> arrays3 = returnArrays(arrCnt, elCntLg);
 
         //adds the arraylists to an arraylist that can be incremented through
         ArrayList<ArrayList<int[]>> allArrays = new ArrayList<>(3);
@@ -186,7 +187,7 @@ public class Main {
             //creates a thread group
             ThreadGroup tg1 = new ThreadGroup("Sorts");
 
-            //creates the threads and assigns them the the thread group
+            //creates the threads and assigns them the thread group
             Thread[] threads = new Thread[6];
             for (int i = 0; i < 6; i++) {
                 threads[i] = new Thread(tg1, sorts[i]);
@@ -255,34 +256,21 @@ public class Main {
                     }
                 }
 
-                Sorter.bubble(bubTot);
-                Sorter.bubble(selTot);
-                Sorter.bubble(bubAvg);
-                Sorter.bubble(selAvg);
+                bubble(bubTot);
+                bubble(selTot);
+                bubble(bubAvg);
+                bubble(selAvg);
 
 
                 File results = new File("results.csv");
                 pw = new PrintWriter(results);
-                pw.println("Array Size,"+elCntSm+","+elCntMd+","+elCntLg);
-                pw.print("bubble total,");
-                for (long x : bubTot) {
-                    pw.print(x+",");
-                }
-                pw.println();
-                pw.print("Selection Total,");
-                for (long x : selTot) {
-                    pw.print(x+",");
-                }
-                pw.println();
-                pw.print("bubble Average,");
-                for (float x : bubAvg) {
-                    pw.print(x+",");
-                }
-                pw.println();
-                pw.print("Selection Average,");
-                for (float x : selAvg) {
-                    pw.print(x+",");
-                }
+                pw.println(","+elCntSm+","+elCntMd+","+elCntLg);
+                //pw.println(",bubble total,bubble average,selection total,selection average");
+
+                pw.println("Bubble Total," + arrayAsString(bubTot));
+                pw.println("Selection Total," + arrayAsString(selTot));
+                pw.println("Bubble Average," + arrayAsString(bubAvg));
+                pw.println("Selection Average," + arrayAsString(selAvg));
             }
 
             //prints the stacktrace if a SortTypeException occurs
@@ -295,5 +283,253 @@ public class Main {
         } finally {
             if (pw != null) {pw.close();}
         }
+    }
+
+    private static String arrayAsString(long[] arr) {
+        StringBuilder string = new StringBuilder();
+        for (long l : arr) {
+            string.append(l).append(",");
+        }
+
+        return string.toString();
+    }
+
+    private static String arrayAsString(float[] arr) {
+        StringBuilder string = new StringBuilder();
+        for (float v : arr) {
+            string.append(v).append(",");
+        }
+
+        return string.toString();
+    }
+
+    //methods to test the sorts
+
+    /**
+     * A method to test the sort algorithms
+     * <p>
+     *     The method creates an instance of the "TestSort" class
+     *     The method calls other methods to get user input, generate an array of that size and sort it
+     *     The array is displayed before and after it is sorted so the user can verify the sort functions correctly
+     * </p>
+     */
+    private static void TestSort() {
+
+        int[] arr1;
+        int[] arr2;
+
+        //create array of the size from getInput()
+        arr1 = createArray(getInput(1));
+        //prints the array
+        printArr(arr1);
+        System.out.println();
+        //sorts the array with the sort method from Sorter
+        Main.bubble(arr1);
+        printArr(arr1);
+        System.out.println();
+        System.out.println();
+        arr2 = createArray(getInput(2));
+        printArr(arr2);
+        System.out.println();
+        Main.selection(arr2);
+        printArr(arr2);
+    }
+
+    /**
+     * prints the array
+     * @param array the array to be printed
+     */
+    private static void printArr(int[] array) {
+        for (int num : array) {
+            System.out.print(num + "\s");
+        }
+    }
+
+    /**
+     * gets a valid user input to use when creating array
+     * @param n sets if the sort is a bubble or selection
+     * @return the size the user wants to use
+     */
+    private static int getInput(int n) {
+        Scanner scan = new Scanner(System.in);
+        String choice;
+        int x = 0;
+        boolean loop;
+        String sort;
+
+        if (n == 1) {
+            sort = "Bubble";
+
+        } else {
+            sort = "Selection";
+        }
+
+        do {
+            System.out.print("Enter the number of items to sort with the " + sort + " sort: ");
+            choice = scan.next();
+            try {
+                x = parseInt(choice);
+                loop = false;
+            } catch (NumberFormatException e) {
+                loop = true;
+            }
+        } while (loop);
+
+        return x;
+    }
+
+
+    //methods that contain the sorts
+
+    /**
+     * Bubble sort for ints
+     * @param array array to be sorted
+     */
+    public static void bubble(int[] array) {
+        for (int j = array.length; j > 0; j--) {
+            for (int i = 1; i < j; i++) {
+                if (array[i - 1] > array[i]) {
+                    int temp = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Selection sort for ints
+     * @param array the array to be sorted
+     */
+    public static void selection(int[] array) {
+        int i,j;
+        int iMin;
+        for(j = 0; j < array.length; j++){
+            iMin = j;
+
+            for ( i = j+1; i < array.length; i++) {
+                if (array[i] < array[iMin]) {
+                    iMin = i;
+                }
+            }
+
+            if ( iMin != j ) {
+                int temp = array[j];
+                array[j] = array[iMin];
+                array[iMin] = temp;
+            }
+        }
+    }
+
+    /**
+     * Bubble sort for longs
+     * @param array the array to be sorted
+     */
+    public static void bubble(long[] array) {
+        int n = array.length;
+
+        for (int j = n; j > 0; j--) {
+            for (int i = 1; i < j; i++) {
+                if (array[i - 1] > array[i]) {
+                    long temp = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Bubble sort for floats
+     * @param array the array to be sorted
+     */
+    public static void bubble(float[] array) {
+        int n = array.length;
+
+        for (int j = n; j > 0; j--) {
+            for (int i = 1; i < j; i++) {
+                if (array[i - 1] > array[i]) {
+                    float temp = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Selection sort for longs
+     * @param array the array to be sorted
+     */
+    public static void selection(long[] array) {
+        int i,j;
+        int iMin;
+        for(j = 0; j < array.length; j++){
+            iMin = j;
+
+            for ( i = j+1; i < array.length; i++) {
+                if (array[i] < array[iMin]) {
+                    iMin = i;
+                }
+            }
+
+            if ( iMin != j ) {
+                long temp = array[j];
+                array[j] = array[iMin];
+                array[iMin] = temp;
+            }
+        }
+    }
+
+    /**
+     * Selection sort for floats
+     * @param array the array to be sorted
+     */
+    public static void selection(float[] array) {
+        int i,j;
+        int iMin;
+        for(j = 0; j < array.length; j++){
+            iMin = j;
+
+            for ( i = j+1; i < array.length; i++) {
+                if (array[i] < array[iMin]) {
+                    iMin = i;
+                }
+            }
+
+            if ( iMin != j ) {
+                float temp = array[j];
+                array[j] = array[iMin];
+                array[iMin] = temp;
+            }
+        }
+    }
+
+    /**
+     * randomly generates an array of length size using 15,000 as the ceiling for the generated numbers
+     * @param size length to make the array
+     * @return randomly generated array of length size
+     */
+    public static int[] createArray(int size) {
+        Random rand = new Random();
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = rand.nextInt(15000);
+        }
+        return array;
+    }
+
+    /**
+     * randomly generates a user input amount of random arrays and stores them in an arraylist
+     * @param amt the amount of arrays to make
+     * @param n the size each array should be
+     * @return an arraylist of amt int[] of length n
+     */
+    public static ArrayList<int[]> returnArrays(int amt, int n) {
+        ArrayList<int[]> arrays = new ArrayList<>(amt);
+        for (int i = 0; i < amt; i++) {
+            arrays.add(createArray(n));
+        }
+        return arrays;
     }
 }
