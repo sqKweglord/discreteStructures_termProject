@@ -46,16 +46,12 @@ public class Sortable implements Runnable {
      * </p>
      * @param arrs the arrayList containing the arrays to be sorted
      * @param n an int designating the type of sort to be performed
-     * @throws SortTypeException errors if n isn't 1 or 2
      */
-    public Sortable(ArrayList<int[]> arrs, int n) throws SortTypeException {
+    public Sortable(ArrayList<int[]> arrs, int n) {
         arrays = arrs;
         arrLen = arrays.get(0).length;
-        if (n < 1 || n > 2) {
-            throw new SortTypeException( n + ": Not a valid sort");
-        } else {
-            sortType = n;
-        }
+        sortType = n;
+
     }
 
     /**

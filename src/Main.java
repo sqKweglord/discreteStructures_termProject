@@ -184,13 +184,10 @@ public class Main {
 
             }
 
-            //creates a thread group
-            ThreadGroup tg1 = new ThreadGroup("Sorts");
-
             //creates the threads and assigns them the thread group
             Thread[] threads = new Thread[6];
             for (int i = 0; i < 6; i++) {
-                threads[i] = new Thread(tg1, sorts[i]);
+                threads[i] = new Thread(sorts[i]);
                 threads[i].start();
             }
 
@@ -274,33 +271,12 @@ public class Main {
             }
 
             //prints the stacktrace if a SortTypeException occurs
-        } catch (SortTypeException e) {
-            System.out.println("Error with sortType");
-            e.printStackTrace();
         } catch (IOException x) {
             System.out.println("IO Error");
             x.printStackTrace();
         } finally {
             if (pw != null) {pw.close();}
         }
-    }
-
-    private static String arrayAsString(long[] arr) {
-        StringBuilder string = new StringBuilder();
-        for (long l : arr) {
-            string.append(l).append(",");
-        }
-
-        return string.toString();
-    }
-
-    private static String arrayAsString(float[] arr) {
-        StringBuilder string = new StringBuilder();
-        for (float v : arr) {
-            string.append(v).append(",");
-        }
-
-        return string.toString();
     }
 
     //methods to test the sorts
@@ -531,5 +507,23 @@ public class Main {
             arrays.add(createArray(n));
         }
         return arrays;
+    }
+
+    private static String arrayAsString(long[] arr) {
+        StringBuilder string = new StringBuilder();
+        for (long l : arr) {
+            string.append(l).append(",");
+        }
+
+        return string.toString();
+    }
+
+    private static String arrayAsString(float[] arr) {
+        StringBuilder string = new StringBuilder();
+        for (float v : arr) {
+            string.append(v).append(",");
+        }
+
+        return string.toString();
     }
 }
