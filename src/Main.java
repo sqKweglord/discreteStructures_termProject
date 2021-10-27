@@ -10,19 +10,7 @@ import static java.lang.Integer.parseInt;
 /**
  * Class: Main
  * @author Harrison Brown
- * @version 3.0
  * Class: CSE 2300 Section 1
- * Started Writing: 09/15/2021
- * Finished Writing: 09/30/2021
- * Documentation date: 9/30/2021
- *<p>
- *      Required system classes:
- *      SortTypeException
- *      Bubble
- *      Selection
- *      Sorter
- *      Sortable
- *</p>
  * <p>
  *      System Description:
  *      A program to compare the efficiency of the Bubble Sort to the efficiency of the Selection Sort.
@@ -45,6 +33,7 @@ public class Main {
      *     During runtime the method performs based on the users choices.
      *     There are also several while loops and try-catch statements to validate user input
      *     and ensure the program doesn't crash based on user input.
+     *</p>
      * @param args generic main arguments
      */
     public static void main(String[] args) {
@@ -92,6 +81,7 @@ public class Main {
         }
 
         //***ask user for size or default***
+
         String ch2;
         System.out.println("The default values for the test is 1000 arrays of each size");
         System.out.println("The small size is 500, the medium is 2500, and the large is 5000");
@@ -107,6 +97,7 @@ public class Main {
             }
         } while (loop);
 
+        //gets the custom array size from the user
         System.out.println();
         if (parseInt(ch2) == 2) {
             loop = true;
@@ -157,7 +148,7 @@ public class Main {
         allArrays.add(arrays2);
         allArrays.add(arrays3);
 
-        //copies arrays to be used by the selection sort
+        //copies the arrays to have a second set that the other sort can use
         ArrayList<ArrayList<int[]>> allArraysAgain = new ArrayList<>(3);
 
         for (ArrayList<int[]> z : allArrays) {
@@ -170,107 +161,105 @@ public class Main {
 
         //***execute sorts***
 
-        //try block to catch SortTypeException or IOException
+        //initializes the sorts
+        Sortable[] sorts = new Sortable[6];
+        for (int i = 1; i < 7; i++) {
+            if (i < 4) {
+                sorts[i - 1] = new Sortable(allArrays.get(i - 1), 1);
+            } else {
+                sorts[i - 1] = new Sortable(allArraysAgain.get(i - 4), 2);
+            }
+
+        }
+
+        //creates the threads and assigns them the thread group
+        Thread[] threads = new Thread[6];
+        for (int i = 0; i < 6; i++) {
+            threads[i] = new Thread(sorts[i]);
+            threads[i].start();
+        }
+
+        //joins the threads
         try {
-
-            //initializes the sorts
-            Sortable[] sorts = new Sortable[6];
-            for (int i = 1; i < 7; i++) {
-                if (i < 4) {
-                    sorts[i - 1] = new Sortable(allArrays.get(i - 1), 1);
-                } else {
-                    sorts[i - 1] = new Sortable(allArraysAgain.get(i - 4), 2);
-                }
-
+            for (Thread t : threads) {
+                t.join();
             }
+            //catch block for thread errors
+        } catch (InterruptedException x) {
+            x.printStackTrace();
+        }
 
-            //creates the threads and assigns them the thread group
-            Thread[] threads = new Thread[6];
-            for (int i = 0; i < 6; i++) {
-                threads[i] = new Thread(sorts[i]);
-                threads[i].start();
+        //***print arrCnt***
+        System.out.println("Amount of arrays tested per sort: " + arrCnt);
+        System.out.println();
+
+        //displays the info for each sort in the console
+        for (Sortable s : sorts) {
+            System.out.print(s);
+            System.out.println("******************************");
+        }
+
+        System.out.println();
+
+        //***ask user if they want to output to a csv***
+        loop = true;
+        do {
+            scan.reset();
+            System.out.print("Do you want to output the results to a csv? (y/n): ");
+            ch1 = scan.next();
+            if (ch1.equalsIgnoreCase("y") || ch1.equalsIgnoreCase("n")) {
+                loop = false;
             }
+        } while (loop);
 
-            //joins the threads
-            try {
-                for (Thread t : threads) {
-                    t.join();
-                }
-            } catch (InterruptedException x) {
-                x.printStackTrace();
-            }
+        //***output to csv***
 
-            //***print arrCnt***
-            System.out.println("Amount of arrays tested per sort: " + arrCnt);
-            System.out.println();
-
-            //displays the info for each sort in the console
-            //will probably output to a csv here as well
-            for (Sortable s : sorts) {
-                System.out.print(s);
-                System.out.println("******************************");
-            }
-
-            System.out.println();
-
-            //***ask user if they want to output to a csv***
-            loop = true;
-            do {
-                scan.reset();
-                System.out.print("Do you want to output the results to a csv? (y/n): ");
-                ch1 = scan.next();
-                if (ch1.equalsIgnoreCase("y") || ch1.equalsIgnoreCase("n")) {
-                    loop = false;
-                }
-            } while (loop);
-
-            //***output to csv***
-
+        //try for IOExceptions
+        try {
             if (ch1.equalsIgnoreCase("y")) {
-                long[] bubTot = new long[3];
-                float[] bubAvg = new float[3];
+            long[] bubTot = new long[3];
+            float[] bubAvg = new float[3];
 
-                long[] selTot = new long[3];
-                float[] selAvg = new float[3];
+            long[] selTot = new long[3];
+            float[] selAvg = new float[3];
 
-                int c1 = 0;
-                int c2 = 0;
-                int c3 = 0;
-                int c4 = 0;
+            int c1 = 0;
+            int c2 = 0;
+            int c3 = 0;
+            int c4 = 0;
 
-                for (Sortable sort : sorts) {
-                    if (sort.getSortType() == 1) {
-                        bubTot[c1] = sort.getTotalTime().toMillis();
-                        c1++;
-                        bubAvg[c2] = sort.getAvgTime();
-                        c2++;
-                    }
-                    if (sort.getSortType() == 2) {
-                        selTot[c3] = sort.getTotalTime().toMillis();
-                        c3++;
-                        selAvg[c4] = sort.getAvgTime();
-                        c4++;
-                    }
+            for (Sortable sort : sorts) {
+                if (sort.getSortType() == 1) {
+                    bubTot[c1] = sort.getTotalTime().toMillis();
+                    c1++;
+                    bubAvg[c2] = sort.getAvgTime();
+                    c2++;
                 }
-
-                bubble(bubTot);
-                bubble(selTot);
-                bubble(bubAvg);
-                bubble(selAvg);
-
-
-                File results = new File("results.csv");
-                pw = new PrintWriter(results);
-                pw.println(","+elCntSm+","+elCntMd+","+elCntLg);
-                //pw.println(",bubble total,bubble average,selection total,selection average");
-
-                pw.println("Bubble Total," + arrayAsString(bubTot));
-                pw.println("Selection Total," + arrayAsString(selTot));
-                pw.println("Bubble Average," + arrayAsString(bubAvg));
-                pw.println("Selection Average," + arrayAsString(selAvg));
+                if (sort.getSortType() == 2) {
+                    selTot[c3] = sort.getTotalTime().toMillis();
+                    c3++;
+                       selAvg[c4] = sort.getAvgTime();
+                       c4++;
+                }
             }
 
-            //prints the stacktrace if a SortTypeException occurs
+            bubble(bubTot);
+            bubble(selTot);
+            bubble(bubAvg);
+            bubble(selAvg);
+
+
+            File results = new File("results.csv");
+            pw = new PrintWriter(results);
+            pw.println(","+elCntSm+","+elCntMd+","+elCntLg);
+
+            pw.println("Bubble Total," + arrayAsString(bubTot));
+            pw.println("Selection Total," + arrayAsString(selTot));
+            pw.println("Bubble Average," + arrayAsString(bubAvg));
+            pw.println("Selection Average," + arrayAsString(selAvg));
+        }
+
+        //prints the stacktrace if a SortTypeException occurs
         } catch (IOException x) {
             System.out.println("IO Error");
             x.printStackTrace();
@@ -284,7 +273,6 @@ public class Main {
     /**
      * A method to test the sort algorithms
      * <p>
-     *     The method creates an instance of the "TestSort" class
      *     The method calls other methods to get user input, generate an array of that size and sort it
      *     The array is displayed before and after it is sorted so the user can verify the sort functions correctly
      * </p>
@@ -296,9 +284,11 @@ public class Main {
 
         //create array of the size from getInput()
         arr1 = createArray(getInput(1));
+
         //prints the array
         printArr(arr1);
         System.out.println();
+
         //sorts the array with the sort method from Sorter
         Main.bubble(arr1);
         printArr(arr1);
@@ -437,6 +427,7 @@ public class Main {
      * Selection sort for longs
      * @param array the array to be sorted
      */
+    //This sort isn't used, but is defined in case I decided to use it and to keep consistency of having sort functions for different numeric data types
     public static void selection(long[] array) {
         int i,j;
         int iMin;
@@ -461,6 +452,7 @@ public class Main {
      * Selection sort for floats
      * @param array the array to be sorted
      */
+    //This sort isn't used, but is defined in case I decided to use it and to keep consistency of having sort functions for different numeric data types
     public static void selection(float[] array) {
         int i,j;
         int iMin;
@@ -509,6 +501,11 @@ public class Main {
         return arrays;
     }
 
+    /***
+     * returns the given long array as a formatted string
+     * @param arr an array of longs
+     * @return a String
+     */
     private static String arrayAsString(long[] arr) {
         StringBuilder string = new StringBuilder();
         for (long l : arr) {
@@ -518,6 +515,11 @@ public class Main {
         return string.toString();
     }
 
+    /***
+     * returns the given float array as a formatted string
+     * @param arr an array of floats
+     * @return a String
+     */
     private static String arrayAsString(float[] arr) {
         StringBuilder string = new StringBuilder();
         for (float v : arr) {

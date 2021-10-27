@@ -4,13 +4,14 @@ import java.time.Instant;
 import static java.time.Duration.ZERO;
 
 /**
+ * Class: Sortable
  * @author Harrison Brown
- * @version 2
+ * This class implements Runnable so that the sorts can be multithreaded
  */
 public class Sortable implements Runnable {
 
     /**
-     * all of the arrays to be sorted
+     * An ArrayList of all the arrays that need to be sorted
      */
     private final ArrayList<int[]> arrays;
 
@@ -91,6 +92,7 @@ public class Sortable implements Runnable {
      * returns the size of length of arrays that were sorted
      * @return arrLen
      */
+    // a getter that is never used, written to maintain consistency of methods
     public int getArrLen() {
         return arrLen;
     }
@@ -99,7 +101,7 @@ public class Sortable implements Runnable {
      * overrides the run method from interface Runnable
      * <p>
      *     This method allows instances of this class to be run in parallel
-     *     This method is were the primary sort takes place
+     *     This method is where the primary sort takes place
      *     By multithreading the sorts, the total program execution is only limited by the longest sort
      * </p>
      */
