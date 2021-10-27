@@ -6,6 +6,7 @@ import static java.time.Duration.ZERO;
 /**
  * Class: Sortable
  * @author Harrison Brown
+ * Class: CSE 2300 Section 1
  * This class implements Runnable so that the sorts can be multithreaded
  */
 public class Sortable implements Runnable {
